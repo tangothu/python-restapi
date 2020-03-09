@@ -1,0 +1,151 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger Rest Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /tasks:
+    get:
+      operationId: tasks.read_all
+      tags:
+        - Tasks
+      summary: Read the entire set of tasks, sorted by title
+      description: Read the entire set of tasks, sorted by title
+      responses:
+        200:
+          description: Successfully read tasks set operation
+          schema:
+            type: array
+            items:
+              properties:
+                task_id:
+                  type: string
+                  description: Id of the task
+                title:
+                  type: string
+                  description: title of the task
+                duedate:
+                  type: string
+                  description: Creation/Update duedate of the task
+
+    post:
+      operationId: tasks.create
+      tags:
+        - Tasks
+      summary: Create a task
+      description: Create a new task
+      parameters:
+        - name: task
+          in: body
+          description: Task to create
+          required: True
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: title of task to create
+      responses:
+        201:
+          description: Successfully created task
+          schema:
+            properties:
+              task_id:
+                type: string
+                description: Id of the task
+              title:
+                type: string
+                description: title of the task
+              duedate:
+                type: string
+                description: Creation/Update duedate of the task record
+
+  /tasks/{task_id}:
+    get:
+      operationId: tasks.read_one
+      tags:
+        - Tasks
+      summary: Read one task
+      description: Read one task
+      parameters:
+        - name: task_id
+          in: path
+          description: Id of the task to get
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read task from tasks data operation
+          schema:
+            type: object
+            properties:
+              task_id:
+                type: string
+                description: Id of the task
+              title:
+                type: string
+                description: title of the task
+              duedate:
+                type: string
+                description: Creation/Update duedate of the task record
+
+    put:
+      operationId: tasks.update
+      tags:
+        - Tasks
+      summary: Update a task
+      description: Update a task
+      parameters:
+        - name: task_id
+          in: path
+          description: Id the task to update
+          type: integer
+          required: True
+        - name: task
+          in: body
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: title of the task
+      responses:
+        200:
+          description: Successfully updated task
+          schema:
+            properties:
+              task_id:
+                type: string
+                description: Id of the task in the database
+              title:
+                type: string
+                description: title of the task
+              duedate:
+                type: string
+                description: Creation/Update duedate of the task record
+
+    delete:
+      operationId: tasks.delete
+      tags:
+        - Tasks
+      summary: Delete a task from the tasks list
+      description: Delete a task
+      parameters:
+        - name: task_id
+          in: path
+          type: integer
+          description: Id of the task to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a task
+
+
