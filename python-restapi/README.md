@@ -1,8 +1,13 @@
+Commands:
+source tasks.sh
 tasks add "write some code" 21/08/2019
 tasks list
 tasks list --expiring-today
 tasks done 3
 
+
+Log location:
+/tmp/python_restapi_logfile.log
 
 Notes:
 swagger UI:

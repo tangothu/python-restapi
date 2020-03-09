@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: This is the swagger file that goes with our server code
+  description: This is the swagger file that goes with server code
   version: "1.0.0"
-  title: Swagger Rest Article
+  title: Swagger Rest
 consumes:
   - application/json
 produces:
@@ -67,6 +67,7 @@ paths:
               duedate:
                 type: string
                 description: Creation/Update duedate of the task record
+
 
   /tasks/{task_id}:
     get:
