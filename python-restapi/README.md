@@ -3,11 +3,6 @@ How to setup environments:
 Python (3.6)
 Create virtual environment 
 
-python3 -m pip install --upgrade pip
-pip3 install virtualenv
-virtualenv -p `which python3` venv
-source venv/bin/activate
-
 
 Commands:
 source tasks.sh

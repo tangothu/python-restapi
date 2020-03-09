@@ -68,6 +68,29 @@ paths:
                 type: string
                 description: Creation/Update duedate of the task record
 
+  /tasks-expiring:
+    get:
+      operationId: tasks.read_expiring
+      tags:
+        - Tasks
+      summary: Read the entire set of tasks that expires today
+      description: Read the entire set of tasks, that expires today
+      responses:
+        200:
+          description: Successfully read tasks operation
+          schema:
+            type: array
+            items:
+              properties:
+                task_id:
+                  type: string
+                  description: Id of the task
+                title:
+                  type: string
+                  description: title of the task
+                duedate:
+                  type: string
+                  description: Creation/Update duedate of the task
 
   /tasks/{task_id}:
     get:

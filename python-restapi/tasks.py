@@ -8,6 +8,7 @@ from config import db
 from models import Task, TaskSchema
 from datetime import datetime
 
+
 def read_all():
     """
     This function responds to a request for /api/tasks
@@ -15,8 +16,24 @@ def read_all():
 
     :return:        json string of list of tasks
     """
-    # Create the list of tasks from our data
     tasks = Task.query.order_by(Task.title).all()
+
+    # Serialize the data for the response
+    task_schema = TaskSchema(many=True)
+    data = task_schema.dump(tasks)
+    return data
+
+
+def read_expiring():
+    """
+    This function responds to a request for /api/tasks-expiring
+    with the complete lists of tasks that will expire today
+
+    :return:        json string of list of tasks
+    """
+    today = datetime.today()
+    print(today)
+    tasks = Task.query.filter(Task.duedate <= today).order_by(Task.title).all()
 
     # Serialize the data for the response
     task_schema = TaskSchema(many=True)
@@ -72,7 +89,7 @@ def create(task):
         # Create a task instance using the schema and the passed in task
         schema = TaskSchema()
         print(duedate)
-        datetime_object = datetime.strptime(duedate, '%m/%d/%Y')
+        datetime_object = datetime.strptime(duedate, '%d/%m/%Y')
         task["duedate"] = datetime_object.strftime('%Y-%m-%d')
 
         new_task = schema.load(task, session=db.session)

@@ -4,15 +4,15 @@
 
 tasks() {
     if [[ $1 == "list" ]]; then
-        if [ -z "$2" ]
-            then
-                echo "No argument supplied"
-                echo "Getting all tasks" >> /tmp/python_restapi_logfile.log
-                command curl -X GET --header "Accept: application/json" "http://localhost:5000/api/tasks"
+        if [[ -z "$2" ]]; then
+            echo "No argument supplied"
+            echo "Getting all tasks" >> /tmp/python_restapi_logfile.log
+            command curl -X GET --header "Accept: application/json" "http://localhost:5000/api/tasks"
         else
-            if [[ $2 == "--expiring-today"]]; then
+            if [[ $2 == "--expiring-today" ]]; then
                 echo "Getting tasks with ${2}" >> /tmp/python_restapi_logfile.log
-
+                command curl -X GET --header "Accept: application/json" "http://localhost:5000/api/tasks-expiring"
+            fi
         fi
 
     elif [[ $1 == "done" ]]; then
